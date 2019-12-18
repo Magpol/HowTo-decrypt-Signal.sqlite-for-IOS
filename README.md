@@ -2,7 +2,7 @@ By looking into the sourcecode of Signal on github i found the file "GRDBDatabas
 https://github.com/signalapp/Signal-iOS/blob/e76583ac7d521e32f5de8ba4001f1847dea19c6e/SignalServiceKit/src/Storage/Database/GRDBDatabaseStorageAdapter.swift 
 
 Signal is storing the DB-key in the keyvalue "GRDBDatabaseCipherKeySpec". The value is randomly generated when initialising the Database for the first time.
-The Key and value are the stored in the keychaing.
+The Key and value are then stored in the keychain.
 
      private static let keyServiceName: String = "GRDBKeyChainService" 
      private static let keyName: String = "GRDBDatabaseCipherKeySpec" 
