@@ -54,3 +54,31 @@ To open and decrypt the database i use sqlcipher. The version supplied via ubunt
 
 The decrypted database is now found under signal_decrypted.sqlite.
 
+
+
+
+
+
+A similar procedure can be used for a previous version of Signal:
+
+Signal is storing the DB-key in the keyvalue "OWSDatabaseCipherKeySpec" (Base64: T1dTRGF0YWJhc2VDaXBoZXJLZXlTcGVj).
+
+The version of sqlcipher used is apparently slightly older, so the version
+parameters must be set accordingly. See https://discuss.zetetic.net/t/upgrading-to-sqlcipher-4/3283
+
+      ./sqlcipher /tmp/Signal.sqlite
+      SQLCipher version 3.30.1 2019-10-10 20:19:45
+      Enter ".help" for usage hints.
+      sqlite> PRAGMA key="x'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'";
+      ok
+      sqlite> PRAGMA cipher_plaintext_header_size=32;
+      sqlite> PRAGMA cipher_page_size = 1024;
+      sqlite> PRAGMA cipher_hmac_algorithm = HMAC_SHA1;
+      sqlite> PRAGMA cipher_kdf_algorithm = PBKDF2_HMAC_SHA1;
+      sqlite> .tables
+      database2                                                                    
+      fts_FullTextSearchFinderExtension                                            
+      fts_FullTextSearchFinderExtension_config                                     
+      fts_FullTextSearchFinderExtension_content                                    
+      fts_FullTextSearchFinderExtension_data                                       
+      .....
